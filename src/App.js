@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import TextComp from './Components/TextComp';
+import useDevice from './hooks/useDevice';
+import useMatchMedia from './hooks/useMatchMedia';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const media = useMatchMedia('(max-width: 600px)');
+    const [isMobile, isTablet, isDesktop, isPrinting] = useDevice();
+
+    return (
+        <div className="App">
+            <TextComp text='Tom' 
+                      media={media} 
+                      isMobile={isMobile} 
+                      isTablet={isTablet} 
+                      isPrinting={isPrinting} 
+                      isDesktop={isDesktop} />
+        </div>
+    );
 }
 
 export default App;
